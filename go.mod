@@ -1,4 +1,4 @@
-module go-slice-methods
+module github.com/arcaster42/go-slice-methods
 
 go 1.18
 
