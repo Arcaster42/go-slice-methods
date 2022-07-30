@@ -66,3 +66,30 @@ func TestFilterFloat64ByFunc(t *testing.T) {
 	assert.Equal(t, testSlice, []float64{3.049234, 8.2085204})
 	assert.Equal(t, len(testSlice), 2)
 }
+
+func TestMapInt(t *testing.T) {
+	input := []int{-3, 0, 3, 6}
+	testSlice := MapInt(input, func(i int) int { return i * 2 })
+	assert.Equal(t, testSlice, []int{-6, 0, 6, 12})
+}
+
+func TestSliceIncludes(t *testing.T) {
+	intTest1 := SliceIncludes([]int{1, 4, 8, 9}, 8)
+	intTest2 := SliceIncludes([]int{1, 4, 8, 9}, 3)
+	stringTest1 := SliceIncludes([]string{"one", "two", "three"}, "two")
+	stringTest2 := SliceIncludes([]string{"one", "two", "three"}, "four")
+	float32Test1 := SliceIncludes([]float32{1.042, 4.2342, 8.412, 9.2342}, 8.412)
+	float32Test2 := SliceIncludes([]float32{1.042, 4.2342, 8.412, 9.2342}, 8.412242)
+	float64Test1 := SliceIncludes([]float64{1.042, 4.2342, 8.412, 9.2342}, 8.412)
+	float64Test2 := SliceIncludes([]float64{1.042, 4.2342, 8.412, 9.2342}, 8.412242)
+	assert.Equal(t, intTest1, true)
+	assert.Equal(t, intTest2, false)
+	assert.Equal(t, stringTest1, true)
+	assert.Equal(t, stringTest2, false)
+	assert.Equal(t, float32Test1, true)
+	assert.Equal(t, float32Test2, false)
+	assert.Equal(t, float32Test1, true)
+	assert.Equal(t, float32Test2, false)
+	assert.Equal(t, float64Test1, true)
+	assert.Equal(t, float64Test2, false)
+}
