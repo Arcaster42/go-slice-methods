@@ -18,6 +18,14 @@ This package adds functions for working with slices similar to that of other lan
 - `FilterFloat32ByFunc`
 - `FilterFloat64ByFunc`
 
+### Tests
+- `SliceIncludes` (supports `int`, `string`, `float32`, `float64`)
+
+### Value Modifiers
+- `MapInt`
+- `MapString`
+- `MapFloat32`
+- `MapFloat64`
+
 ## Upcoming Features
-- `map`
 - `reduce`
