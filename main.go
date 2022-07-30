@@ -4,17 +4,7 @@ type InputType interface {
 	int | float32 | float64 | string | bool
 }
 
-func Filter[i InputType](arg []i, key i) []i {
-	var filteredSlice []i
-	for _, v := range arg {
-		if v == key {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-func FilterByFunction[i InputType](arg []i, fn func(i) bool) []i {
+func Filter[i InputType](arg []i, fn func(i) bool) []i {
 	var filteredSlice []i
 	for _, v := range arg {
 		if fn(v) {

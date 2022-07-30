@@ -7,39 +7,39 @@ import (
 )
 
 func TestFilterInt(t *testing.T) {
-	testSlice := Filter([]int{1, 4, 19, 4, 2, 64, 43}, 4)
+	testSlice := Filter([]int{1, 4, 19, 4, 2, 64, 43}, func(i int) bool { return i == 4 })
 	assert.Equal(t, testSlice, []int{4, 4})
 	assert.Equal(t, len(testSlice), 2)
 }
 
 func TestFilterString(t *testing.T) {
-	testSlice := Filter([]string{"one", "two", "three", "three", "four", "five"}, "three")
+	testSlice := Filter([]string{"one", "two", "three", "three", "four", "five"}, func(s string) bool { return s == "three" })
 	assert.Equal(t, testSlice, []string{"three", "three"})
 	assert.Equal(t, len(testSlice), 2)
 }
 
 func TestFilterFloat32(t *testing.T) {
-	testSlice := Filter([]float32{1.00243, 3.2059023, 8.2039502, 3.2059023, 12.402952}, 3.2059023)
+	testSlice := Filter([]float32{1.00243, 3.2059023, 8.2039502, 3.2059023, 12.402952}, func(f float32) bool { return f == 3.2059023 })
 	assert.Equal(t, testSlice, []float32{3.2059023, 3.2059023})
 	assert.Equal(t, len(testSlice), 2)
 }
 
 func TestFilterFloat64(t *testing.T) {
-	testSlice := Filter([]float64{1.00243, 3.2059023, 8.2039502, 3.2059023, 12.402952}, 3.2059023)
+	testSlice := Filter([]float64{1.00243, 3.2059023, 8.2039502, 3.2059023, 12.402952}, func(f float64) bool { return f == 3.2059023 })
 	assert.Equal(t, testSlice, []float64{3.2059023, 3.2059023})
 	assert.Equal(t, len(testSlice), 2)
 }
 
 func TestFilterBool(t *testing.T) {
-	testSlice := Filter([]bool{true, false, false, true, false, false}, true)
+	testSlice := Filter([]bool{true, false, false, true, false, false}, func(b bool) bool { return b == true })
 	assert.Equal(t, testSlice, []bool{true, true})
 	assert.Equal(t, len(testSlice), 2)
 }
 
 func TestFilterIntByFunc(t *testing.T) {
 	input := []int{-10, -6, 0, 2, 5, 8}
-	testSlice := FilterByFunction(input, func(i int) bool { return i > 0 })
-	testSlice2 := FilterByFunction(input, func(i int) bool { return i%2 == 0 })
+	testSlice := Filter(input, func(i int) bool { return i > 0 })
+	testSlice2 := Filter(input, func(i int) bool { return i%2 == 0 })
 	assert.Equal(t, testSlice, []int{2, 5, 8})
 	assert.Equal(t, len(testSlice), 3)
 	assert.Equal(t, testSlice2, []int{-10, -6, 0, 2, 8})
@@ -48,21 +48,21 @@ func TestFilterIntByFunc(t *testing.T) {
 
 func TestFilterStringByFunc(t *testing.T) {
 	input := []string{"one", "two", "three", "four", "five"}
-	testSlice := FilterByFunction(input, func(s string) bool { return len(s) > 3 })
+	testSlice := Filter(input, func(s string) bool { return len(s) > 3 })
 	assert.Equal(t, testSlice, []string{"three", "four", "five"})
 	assert.Equal(t, len(testSlice), 3)
 }
 
 func TestFilterFloat32ByFunc(t *testing.T) {
 	input := []float32{-1.253263, -4.2959302, 0.00002, 3.049234, 8.2085204}
-	testSlice := FilterByFunction(input, func(f float32) bool { return f > 0.1 })
+	testSlice := Filter(input, func(f float32) bool { return f > 0.1 })
 	assert.Equal(t, testSlice, []float32{3.049234, 8.2085204})
 	assert.Equal(t, len(testSlice), 2)
 }
 
 func TestFilterFloat64ByFunc(t *testing.T) {
 	input := []float64{-1.256463, -4.2959302, 0.00002, 3.049234, 8.2085204}
-	testSlice := FilterByFunction(input, func(f float64) bool { return f > 0.1 })
+	testSlice := Filter(input, func(f float64) bool { return f > 0.1 })
 	assert.Equal(t, testSlice, []float64{3.049234, 8.2085204})
 	assert.Equal(t, len(testSlice), 2)
 }
