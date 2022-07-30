@@ -45,3 +45,17 @@ func TestFilterIntByFunc(t *testing.T) {
 	assert.Equal(t, testSlice2, []int{-10, -6, 0, 2, 8})
 	assert.Equal(t, len(testSlice2), 5)
 }
+
+func TestFilterFloat32ByFunc(t *testing.T) {
+	input := []float32{-1.253263, -4.2959302, 0.00002, 3.049234, 8.2085204}
+	testSlice := FilterFloat32ByFunc(input, func(f float32) bool { return f > 0.1 })
+	assert.Equal(t, testSlice, []float32{3.049234, 8.2085204})
+	assert.Equal(t, len(testSlice), 2)
+}
+
+func TestFilterFloat64ByFunc(t *testing.T) {
+	input := []float64{-1.256463, -4.2959302, 0.00002, 3.049234, 8.2085204}
+	testSlice := FilterFloat64ByFunc(input, func(f float64) bool { return f > 0.1 })
+	assert.Equal(t, testSlice, []float64{3.049234, 8.2085204})
+	assert.Equal(t, len(testSlice), 2)
+}

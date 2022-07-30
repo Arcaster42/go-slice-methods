@@ -59,3 +59,23 @@ func FilterIntByFunc(arg []int, test func(int) bool) []int {
 	}
 	return filteredSlice
 }
+
+func FilterFloat32ByFunc(arg []float32, test func(float32) bool) []float32 {
+	var filteredSlice []float32
+	for _, v := range arg {
+		if test(v) {
+			filteredSlice = append(filteredSlice, v)
+		}
+	}
+	return filteredSlice
+}
+
+func FilterFloat64ByFunc(arg []float64, test func(float64) bool) []float64 {
+	var filteredSlice []float64
+	for _, v := range arg {
+		if test(v) {
+			filteredSlice = append(filteredSlice, v)
+		}
+	}
+	return filteredSlice
+}
