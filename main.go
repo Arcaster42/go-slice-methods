@@ -1,7 +1,11 @@
 package main
 
-func FilterInt(arg []int, key int) []int {
-	var filteredSlice []int
+type InputType interface {
+	int | float32 | float64 | string | bool
+}
+
+func Filter[i InputType](arg []i, key i) []i {
+	var filteredSlice []i
 	for _, v := range arg {
 		if v == key {
 			filteredSlice = append(filteredSlice, v)
@@ -10,123 +14,25 @@ func FilterInt(arg []int, key int) []int {
 	return filteredSlice
 }
 
-func MapInt(arg []int, fn func(int) int) []int {
-	var filteredSlice []int
+func FilterByFunction[i InputType](arg []i, fn func(i) bool) []i {
+	var filteredSlice []i
 	for _, v := range arg {
-		filteredSlice = append(filteredSlice, fn(v))
-	}
-	return filteredSlice
-}
-
-func FilterString(arg []string, key string) []string {
-	var filteredSlice []string
-	for _, v := range arg {
-		if v == key {
+		if fn(v) {
 			filteredSlice = append(filteredSlice, v)
 		}
 	}
 	return filteredSlice
 }
 
-func MapString(arg []string, fn func(string) string) []string {
-	var filteredSlice []string
+func Map[i InputType](arg []i, fn func(i) i) []i {
+	var mappedSlice []i
 	for _, v := range arg {
-		filteredSlice = append(filteredSlice, fn(v))
+		mappedSlice = append(mappedSlice, fn(v))
 	}
-	return filteredSlice
+	return mappedSlice
 }
 
-func FilterFloat32(arg []float32, key float32) []float32 {
-	var filteredSlice []float32
-	for _, v := range arg {
-		if v == key {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-func MapFloat32(arg []float32, fn func(float32) float32) []float32 {
-	var filteredSlice []float32
-	for _, v := range arg {
-		filteredSlice = append(filteredSlice, fn(v))
-	}
-	return filteredSlice
-}
-
-func FilterFloat64(arg []float64, key float64) []float64 {
-	var filteredSlice []float64
-	for _, v := range arg {
-		if v == key {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-func MapFloat64(arg []float64, fn func(float64) float64) []float64 {
-	var filteredSlice []float64
-	for _, v := range arg {
-		filteredSlice = append(filteredSlice, fn(v))
-	}
-	return filteredSlice
-}
-
-func FilterBool(arg []bool, key bool) []bool {
-	var filteredSlice []bool
-	for _, v := range arg {
-		if v == key {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-func FilterIntByFunc(arg []int, test func(int) bool) []int {
-	var filteredSlice []int
-	for _, v := range arg {
-		if test(v) {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-func FilterStringByFunc(arg []string, test func(string) bool) []string {
-	var filteredSlice []string
-	for _, v := range arg {
-		if test(v) {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-func FilterFloat32ByFunc(arg []float32, test func(float32) bool) []float32 {
-	var filteredSlice []float32
-	for _, v := range arg {
-		if test(v) {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-func FilterFloat64ByFunc(arg []float64, test func(float64) bool) []float64 {
-	var filteredSlice []float64
-	for _, v := range arg {
-		if test(v) {
-			filteredSlice = append(filteredSlice, v)
-		}
-	}
-	return filteredSlice
-}
-
-type IncludeType interface {
-	int | float32 | float64 | string
-}
-
-func SliceIncludes[i IncludeType](arg []i, key i) bool {
+func SliceIncludes[i InputType](arg []i, key i) bool {
 	for _, v := range arg {
 		if v == key {
 			return true
