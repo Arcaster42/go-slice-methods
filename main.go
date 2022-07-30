@@ -60,6 +60,16 @@ func FilterIntByFunc(arg []int, test func(int) bool) []int {
 	return filteredSlice
 }
 
+func FilterStringByFunc(arg []string, test func(string) bool) []string {
+	var filteredSlice []string
+	for _, v := range arg {
+		if test(v) {
+			filteredSlice = append(filteredSlice, v)
+		}
+	}
+	return filteredSlice
+}
+
 func FilterFloat32ByFunc(arg []float32, test func(float32) bool) []float32 {
 	var filteredSlice []float32
 	for _, v := range arg {
